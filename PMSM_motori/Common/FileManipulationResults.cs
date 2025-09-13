@@ -35,7 +35,12 @@ namespace Common
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (MemoryStreamCollection == null) return;
+            foreach(KeyValuePair<string, MemoryStream> kvp in MemoryStreamCollection)
+            {
+                kvp.Value?.Dispose();
+            }
+            MemoryStreamCollection.Clear();
         }
     }
 }

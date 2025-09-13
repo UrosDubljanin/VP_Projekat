@@ -27,6 +27,9 @@ namespace Client
                         Console.WriteLine("Izaberite drugi broj opcija nije validna");
                         break;
                     case 1:
+                        SendFile(proxy);
+                        break;
+
 
                 }
             } while (number != 3);
