@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PMSM_motori
+namespace Common
 {
-    internal class Program
+    public class Merenje
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }

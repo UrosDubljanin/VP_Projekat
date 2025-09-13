@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35506.116 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMSM_motori", "PMSM_motori.csproj", "{E60D447D-77AE-46AD-B5FA-AE094B44BC7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server.csproj", "{E60D447D-77AE-46AD-B5FA-AE094B44BC7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Klase\Common.csproj", "{91F5C24A-ECCA-42E3-9D57-11AFA1D3B481}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "..\Client\Client.csproj", "{34F55D45-CF96-4483-B451-2DC9B9A46E1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{E60D447D-77AE-46AD-B5FA-AE094B44BC7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E60D447D-77AE-46AD-B5FA-AE094B44BC7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E60D447D-77AE-46AD-B5FA-AE094B44BC7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91F5C24A-ECCA-42E3-9D57-11AFA1D3B481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91F5C24A-ECCA-42E3-9D57-11AFA1D3B481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91F5C24A-ECCA-42E3-9D57-11AFA1D3B481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91F5C24A-ECCA-42E3-9D57-11AFA1D3B481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34F55D45-CF96-4483-B451-2DC9B9A46E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34F55D45-CF96-4483-B451-2DC9B9A46E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34F55D45-CF96-4483-B451-2DC9B9A46E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34F55D45-CF96-4483-B451-2DC9B9A46E1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
