@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    internal class Merenje
+    internal class ClientProgram
     {
         static void Main(string[] args)
         {
