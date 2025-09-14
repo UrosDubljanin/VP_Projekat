@@ -11,7 +11,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            using (ServiceHost host = new ServiceHost(typeof(FileHandlingService)))
+            using (ServiceHost host = new ServiceHost(typeof(PMSMService)))
             {
                 host.Open();
                 Console.WriteLine("Konekcija je uspesno otvorena, pritisni bilo koji taste za zatvaranje");

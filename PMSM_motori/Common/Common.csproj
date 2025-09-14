@@ -43,9 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileManipulationOptions.cs" />
-    <Compile Include="FileManipulationResults.cs" />
-    <Compile Include="IFileHandling.cs" />
+    <Compile Include="MetaData.cs" />
+    <Compile Include="Results.cs" />
+    <Compile Include="IPMSMService.cs" />
+    <Compile Include="MotorSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

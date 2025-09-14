@@ -1,5 +1,4 @@
-﻿using Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -9,11 +8,14 @@ using System.Threading.Tasks;
 namespace Common
 {
     [ServiceContract]
-    public interface IFileHandling
+    public interface IPMSMService
     {
         [OperationContract]
-        FileManipulationResults SendFile(FileManipulationOptions options);
+        Results StartSession(MotorSample meta);
         [OperationContract]
-        FileManipulationResults GetFile(FileManipulationOptions options);
+        Results PushSample(MotorSample sample);
+        [OperationContract]
+        Results EndSession();
+
     }
 }
