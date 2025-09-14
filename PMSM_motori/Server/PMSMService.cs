@@ -1,6 +1,7 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,6 @@ namespace Server
     public class PMSMService : IPMSMService
     {
         private static bool SessiaUToku = false;
-        private static string validniPath = "measurements_session.csv";
-        private static string nevalidniPath = "rejects.csv";
         private static StreamWriter validniPodaci;
         private static StreamWriter nevalidniPodaci;
         public Results EndSession()
@@ -44,7 +43,7 @@ namespace Server
 
                 Results result = new Results();
                 result.Status = StatusType.COMPLETED;
-                result.Poruka = "Sesija je vec zavrsena.";
+                result.Poruka = "Sesija je uspesno zavrsena.";
                 return result;
 
 
@@ -69,14 +68,14 @@ namespace Server
                     result.Poruka = "Sesija nije pocela, mora poceti da bi se pushovali samplovi.";
                     return result;
                 }
-                if (validniPath == null)
+                if (validniPodaci == null)
                 {
                     Results result = new Results();
                     result.Status = StatusType.COMPLETED;
                     result.Poruka = "Fajl za validne podatke nije otvoren.";
                     return result;
                 }
-                if (nevalidniPath == null)
+                if (nevalidniPodaci == null)
                 {
                     Results result = new Results();
                     result.Status = StatusType.COMPLETED;
@@ -120,7 +119,7 @@ namespace Server
 
         }
 
-        public Results StartSession(MotorSample meta)
+        public Results StartSession(MetaData meta)
         {
             try
             {
@@ -132,8 +131,8 @@ namespace Server
                     return r;
                 }
 
-                validniPodaci = new StreamWriter(validniPath, false);
-                nevalidniPodaci = new StreamWriter(nevalidniPath, false);
+                validniPodaci = new StreamWriter(ConfigurationManager.AppSettings["DataPath1"], true);
+                nevalidniPodaci = new StreamWriter(ConfigurationManager.AppSettings["DataPath2"], true);
 
                 validniPodaci.WriteLine("Stator_Winding,Stator_Tooth,Stator_Yoke,PM,Profile_Id,Ambient,Torque");
                 nevalidniPodaci.WriteLine("Stator_Winding,Stator_Tooth,Stator_Yoke,PM,Profile_Id,Ambient,Torque");

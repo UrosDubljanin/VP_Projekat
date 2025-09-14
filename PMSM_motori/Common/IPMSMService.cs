@@ -11,7 +11,7 @@ namespace Common
     public interface IPMSMService
     {
         [OperationContract]
-        Results StartSession(MotorSample meta);
+        Results StartSession(MetaData meta);
         [OperationContract]
         Results PushSample(MotorSample sample);
         [OperationContract]

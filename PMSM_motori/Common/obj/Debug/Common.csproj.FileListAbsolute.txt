@@ -1,0 +1,6 @@
+C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Common\bin\Debug\Common.dll
+C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Common\bin\Debug\Common.pdb
+C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Common\obj\Debug\Common.dll
+C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Common\obj\Debug\Common.pdb

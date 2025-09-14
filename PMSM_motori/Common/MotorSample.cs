@@ -20,7 +20,7 @@ namespace Common
             Torque = 0;
         }
 
-        public MotorSample(float stator_Winding, float stator_Tooth, float stator_Yoke, float pM, int profile_ID, float ambient, float torque)
+        public MotorSample(double stator_Winding, double stator_Tooth, double stator_Yoke, double pM, int profile_ID, double ambient, double torque)
         {
             Stator_Winding = stator_Winding;
             Stator_Tooth = stator_Tooth;
