@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
@@ -71,27 +72,57 @@ namespace Client
             {
                 string relativePath = ConfigurationManager.AppSettings["DataPath"];
                 string fullPath = Path.GetFullPath(relativePath);
+                int metaIspisan = 0;
 
                 using (StreamReader sr = new StreamReader(fullPath))
                 {
 
-                    for (int i = 0; i < 102; i++)
+                    for (int i = 0; i < 100; i++)
                     {
+                        Thread.Sleep(200);
 
                         string linija = sr.ReadLine();
-                        if (i == 1)
+                        if (i >= 1 && metaIspisan==0)
                         {
+                            string poruka = "";
+                            MetaData meta;
                             string[] delovi = linija.Split(',');
-                            MetaData meta = new MetaData(Double.Parse(delovi[2]), Double.Parse(delovi[4]), Double.Parse(delovi[9]), Double.Parse(delovi[8]), int.Parse(delovi[12]), Double.Parse(delovi[10]), Double.Parse(delovi[11]));
-                            Results result = proxy.StartSession(meta);
-                            Console.WriteLine($"Poruka: {result.Poruka}, Status: {result.Status},Acknowledgement: {result.Acknowledgement}");
+                            if (TryCreateMeta(delovi,out meta,out poruka))
+                            {
+                                Results result = proxy.StartSession(meta);
+                                Console.WriteLine($"Poruka: {result.Poruka}, Status: {result.Status},Acknowledgement: {result.Acknowledgement}");
+                                metaIspisan = 1;
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"DataFormatFault: {poruka}");
+                                Console.ResetColor();
+                            }
                         }
-                        else if (i > 1)
+                        else if (i > 1 && metaIspisan==1)
                         {
+                            string poruka = "";
+                            MotorSample sample;
                             string[] delovi = linija.Split(',');
-                            MotorSample sample = new MotorSample(Double.Parse(delovi[2]), Double.Parse(delovi[4]), Double.Parse(delovi[9]), Double.Parse(delovi[8]), int.Parse(delovi[12]), Double.Parse(delovi[10]), Double.Parse(delovi[11]));
-                            Results result = proxy.PushSample(sample);
-                            Console.WriteLine($"Poruka: {result.Poruka}, Status: {result.Status},Acknowledgement: {result.Acknowledgement}");
+                            if (TryCreateSample(delovi, out sample, out poruka))
+                            {
+                                Results result = proxy.PushSample(sample);
+                                if (result.validationFault.jeste)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine($"ValidationFault: Polja: {result.validationFault.Polje}");
+                                    Console.WriteLine($"                 Poruke: {result.validationFault.Poruka}");
+                                    Console.ResetColor();
+                                }
+                                Console.WriteLine($"Poruka: {result.Poruka}, Status: {result.Status},Acknowledgement: {result.Acknowledgement}");
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"DataFormatFault: {poruka}");
+                                Console.ResetColor();
+                            }                        
                         }
 
 
@@ -103,6 +134,66 @@ namespace Client
             }catch (Exception e) 
             { 
                 Console.WriteLine(e.Message);
+            }
+        }
+        public static bool TryCreateMeta(string[] delovi, out MetaData meta, out string poruka)
+        {
+            meta = null;
+            poruka = "";
+
+            try
+            {
+                meta = new MetaData
+                {
+                    Stator_Winding = double.Parse(delovi[2]),
+                    Stator_Tooth = double.Parse(delovi[4]),
+                    Stator_Yoke = double.Parse(delovi[9]),
+                    PM = double.Parse(delovi[8]),
+                    Profile_ID = int.Parse(delovi[12]),
+                    Ambient = double.Parse(delovi[10]),
+                    Torque = double.Parse(delovi[11])
+                };
+                return true;
+            }
+            catch (FormatException ex)
+            {
+                poruka = $"Format error: {ex.Message}";
+                return false;
+            }
+            catch (Exception ex)
+            {
+                poruka = $"Unexpected error: {ex.Message}";
+                return false;
+            }
+        }
+        public static bool TryCreateSample(string[] delovi, out MotorSample sample, out string poruka)
+        {
+            sample = null;
+            poruka = "";
+
+            try
+            {
+                sample = new MotorSample
+                {
+                    Stator_Winding = double.Parse(delovi[2]),
+                    Stator_Tooth = double.Parse(delovi[4]),
+                    Stator_Yoke = double.Parse(delovi[9]),
+                    PM = double.Parse(delovi[8]),
+                    Profile_ID = int.Parse(delovi[12]),
+                    Ambient = double.Parse(delovi[10]),
+                    Torque = double.Parse(delovi[11])
+                };
+                return true;
+            }
+            catch (FormatException ex)
+            {
+                poruka = $"Format error: {ex.Message}";
+                return false;
+            }
+            catch (Exception ex)
+            {
+                poruka = $"Unexpected error: {ex.Message}";
+                return false;
             }
         }
     }

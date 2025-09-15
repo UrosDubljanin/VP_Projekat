@@ -26,10 +26,13 @@ namespace Common
     {
         public Results()
         {
+            ValidationFault validationFault = new ValidationFault();
             AcknowledgementType Acknowledgement = AcknowledgementType.NACK;
             StatusType Status = StatusType.COMPLETED;
             string Poruka = "";
         }
+        [DataMember]
+        public ValidationFault validationFault {  get; set; }
         [DataMember]
         public AcknowledgementType Acknowledgement { get; set; }
         [DataMember]

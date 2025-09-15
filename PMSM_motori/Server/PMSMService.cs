@@ -14,6 +14,7 @@ namespace Server
         private static bool SessiaUToku = false;
         private static StreamWriter validniPodaci;
         private static StreamWriter nevalidniPodaci;
+        private int brojac = 0;
         public Results EndSession()
         {
             try
@@ -83,14 +84,16 @@ namespace Server
                     return result;
                 }
 
-                List<string> greske = ProveraValidnosti(sample);
+                ValidationFault greska = ProveraValidnosti(sample);
 
-                if (greske.Count == 0)
+                if (greska.jeste)
                 {
                     validniPodaci.WriteLine($"{sample.Stator_Winding},{sample.Stator_Tooth},{sample.Stator_Yoke},{sample.PM},{sample.Profile_ID},{sample.Ambient},{sample.Torque}");
                     validniPodaci.Flush();
+                    brojac++;
 
                     Results result = new Results();
+                    result.validationFault= greska;
                     result.Acknowledgement = AcknowledgementType.ACK;
                     result.Status = StatusType.IN_PROGRESS;
                     result.Poruka = "Red je validan i uspesno pushovan.";
@@ -103,9 +106,10 @@ namespace Server
                     nevalidniPodaci.Flush();
 
                     Results result = new Results();
+                    result.validationFault= greska;
                     result.Acknowledgement = AcknowledgementType.NACK;
                     result.Status = StatusType.IN_PROGRESS;
-                    result.Poruka = $"Red je nevalidan: {string.Join(";",greske)}";
+                    result.Poruka = $"Red je nevalidan";
                     return result;
                 }
             }
@@ -144,6 +148,7 @@ namespace Server
 
                 validniPodaci.WriteLine($"{meta.Stator_Winding},{meta.Stator_Tooth},{meta.Stator_Yoke},{meta.PM},{meta.Profile_ID},{meta.Ambient},{meta.Torque}");
                 validniPodaci.Flush();
+                brojac++;
 
                 Results result = new Results();
                 result.Acknowledgement = AcknowledgementType.ACK;
@@ -159,16 +164,18 @@ namespace Server
                 return result;
             }
         }
-        private List<string> ProveraValidnosti(MotorSample sample)
+        private ValidationFault ProveraValidnosti(MotorSample sample)
         {
-            List<string> greske= new List<string>();
+            ValidationFault greska= new ValidationFault();
 
             if (sample.PM <= 0)
             {
-                greske.Add("PM mora biti > 0");
+                greska.jeste= true;
+                greska.Poruka = greska.Poruka+"PM mora biti veci od 0 ;";
+                greska.Polje = greska.Polje + "PM ;";
             }
             
-            return greske;
+            return greska;
         }
     }
 }
