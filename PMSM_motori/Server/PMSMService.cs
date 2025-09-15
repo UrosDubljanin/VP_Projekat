@@ -86,7 +86,7 @@ namespace Server
 
                 ValidationFault greska = ProveraValidnosti(sample);
 
-                if (greska.jeste)
+                if (!greska.jeste)
                 {
                     validniPodaci.WriteLine($"{sample.Stator_Winding},{sample.Stator_Tooth},{sample.Stator_Yoke},{sample.PM},{sample.Profile_ID},{sample.Ambient},{sample.Torque}");
                     validniPodaci.Flush();
@@ -167,6 +167,7 @@ namespace Server
         private ValidationFault ProveraValidnosti(MotorSample sample)
         {
             ValidationFault greska= new ValidationFault();
+            greska.jeste = false;
 
             if (sample.PM <= 0)
             {

@@ -20,7 +20,7 @@ namespace Client
             IPMSMService proxy = factory.CreateChannel();
 
             int number = 0;
-
+            bool vidiPoruke = false;
             do
             {
                 number = PrintMeni();
@@ -31,12 +31,28 @@ namespace Client
                         Console.WriteLine("Izabrali ste nepostojanu opciju");
                         break;
                     case 1:
-                        SlanjePodataka(proxy);
+                        SlanjePodataka(proxy,vidiPoruke);
+                        break;
+                    case 2:
+                        if (!vidiPoruke)
+                        {
+                            vidiPoruke = true;
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine("Poruke CE biti vidljive u toku prenosa.");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            vidiPoruke = false;
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine("Poruke NECE biti vidljive u toku prenosa.");
+                            Console.ResetColor();
+                        }
                         break;
                 }
 
 
-            } while (number != 2);
+            } while (number != 3);
 
             return;
         }
@@ -44,12 +60,13 @@ namespace Client
         {
             Console.WriteLine("Izaberite opciju:");
             Console.WriteLine("1. Zapocnite sesiju.");
-            Console.WriteLine("2. Izadjite.");
-
+            Console.WriteLine("2. Vidi sve poruke");
+            Console.WriteLine("3. Izadjite.");
             try
+
             {
                 int number = int.Parse(Console.ReadLine());
-                if (number > 0 && number <= 2)
+                if (number > 0 && number <= 3)
                 {
                     return number;
                 }
@@ -65,7 +82,7 @@ namespace Client
             }
         }
 
-        public static void SlanjePodataka(IPMSMService proxy)
+        public static void SlanjePodataka(IPMSMService proxy,bool vidiPoruke)
         {
 
             try
@@ -76,6 +93,14 @@ namespace Client
 
                 using (StreamReader sr = new StreamReader(fullPath))
                 {
+                    Console.WriteLine("=== PMSM Monitoring ===");
+                    Console.Write("Status: ");
+                    int statusLine = Console.CursorTop;
+
+                    Console.SetCursorPosition(8, statusLine);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Slanje u toku...");
+                    Console.ResetColor();
 
                     for (int i = 0; i < 100; i++)
                     {
@@ -90,7 +115,7 @@ namespace Client
                             if (TryCreateMeta(delovi,out meta,out poruka))
                             {
                                 Results result = proxy.StartSession(meta);
-                                Console.WriteLine($"Poruka: {result.Poruka}, Status: {result.Status},Acknowledgement: {result.Acknowledgement}");
+                                if(vidiPoruke)Console.WriteLine($"Poruka: {result.Poruka}, Status: {result.Status},Acknowledgement: {result.Acknowledgement}");
                                 metaIspisan = 1;
                             }
                             else
@@ -115,7 +140,7 @@ namespace Client
                                     Console.WriteLine($"                 Poruke: {result.validationFault.Poruka}");
                                     Console.ResetColor();
                                 }
-                                Console.WriteLine($"Poruka: {result.Poruka}, Status: {result.Status},Acknowledgement: {result.Acknowledgement}");
+                                if(vidiPoruke)Console.WriteLine($"Poruka: {result.Poruka}, Status: {result.Status},Acknowledgement: {result.Acknowledgement}");
                             }
                             else
                             {
@@ -127,8 +152,20 @@ namespace Client
 
 
                     }
+                    int nastavak = Console.CursorTop;
+                    Console.SetCursorPosition(8, statusLine);
+                    Console.Write(new string(' ', 20));
+                    Console.SetCursorPosition(8, statusLine);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Zavrsen prenos!");
+                    Console.ResetColor();
+
+                    Console.SetCursorPosition(0, nastavak);
+                    Console.WriteLine("");
+
+
                     Results r = proxy.EndSession();
-                    Console.WriteLine($"Poruka: {r.Poruka}, Status: {r.Status},Acknowledgement: {r.Acknowledgement}");
+                    if(vidiPoruke)Console.WriteLine($"Poruka: {r.Poruka}, Status: {r.Status},Acknowledgement: {r.Acknowledgement}");
                 }
             
             }catch (Exception e) 
