@@ -22,7 +22,9 @@ namespace Server
             };
             service.OnWarningRaised += (s, e) =>
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"[WARN] {e.Kind} {e.Direction} | Value={e.Value:F3} Ref={e.Reference:F3}");
+                Console.ResetColor();
             };
             service.OnTransferCompleted += (s, e) =>
             {
