@@ -182,13 +182,13 @@ namespace Client
             {
                 meta = new MetaData
                 {
-                    Stator_Winding = double.Parse(delovi[2]),
-                    Stator_Tooth = double.Parse(delovi[4]),
-                    Stator_Yoke = double.Parse(delovi[9]),
-                    PM = double.Parse(delovi[8]),
+                    Stator_Winding = double.Parse(delovi[2], CultureInfo.InvariantCulture),
+                    Stator_Tooth = double.Parse(delovi[4], CultureInfo.InvariantCulture),
+                    Stator_Yoke = double.Parse(delovi[9], CultureInfo.InvariantCulture),
+                    PM = double.Parse(delovi[8], CultureInfo.InvariantCulture),
                     Profile_ID = int.Parse(delovi[12]),
-                    Ambient = double.Parse(delovi[10]),
-                    Torque = double.Parse(delovi[11])
+                    Ambient = double.Parse(delovi[10], CultureInfo.InvariantCulture),
+                    Torque = double.Parse(delovi[11], CultureInfo.InvariantCulture)
                 };
                 return true;
             }
@@ -212,13 +212,13 @@ namespace Client
             {
                 sample = new MotorSample
                 {
-                    Stator_Winding = double.Parse(delovi[2]),
-                    Stator_Tooth = double.Parse(delovi[4]),
-                    Stator_Yoke = double.Parse(delovi[9]),
-                    PM = double.Parse(delovi[8]),
+                    Stator_Winding = double.Parse(delovi[2], CultureInfo.InvariantCulture),
+                    Stator_Tooth = double.Parse(delovi[4], CultureInfo.InvariantCulture),
+                    Stator_Yoke = double.Parse(delovi[9], CultureInfo.InvariantCulture),
+                    PM = double.Parse(delovi[8], CultureInfo.InvariantCulture),
                     Profile_ID = int.Parse(delovi[12]),
-                    Ambient = double.Parse(delovi[10]),
-                    Torque = double.Parse(delovi[11])
+                    Ambient = double.Parse(delovi[10], CultureInfo.InvariantCulture),
+                    Torque = double.Parse(delovi[11], CultureInfo.InvariantCulture)
                 };
                 return true;
             }

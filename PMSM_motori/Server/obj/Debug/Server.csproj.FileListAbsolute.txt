@@ -8,3 +8,13 @@ C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Server\obj\Debug\Server.cspro
 C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Server\obj\Debug\Server.csproj.Up2Date
 C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Server\obj\Debug\Server.exe
 C:\Users\home\source\repos\VP_Projekat\PMSM_motori\Server\obj\Debug\Server.pdb
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\obj\Debug\Server.csproj.AssemblyReference.cache
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\obj\Debug\Server.exe
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\obj\Debug\Server.pdb
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\bin\Debug\Server.exe.config
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\bin\Debug\Server.exe
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\bin\Debug\Server.pdb
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\bin\Debug\Common.dll
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\bin\Debug\Common.pdb
+C:\Users\Windows User\source\repos\VP_Projekat\PMSM_motori\Server\obj\Debug\Server.csproj.Up2Date
