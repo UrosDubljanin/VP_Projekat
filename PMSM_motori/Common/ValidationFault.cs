@@ -13,14 +13,12 @@ namespace Common
         [DataMember] public bool jeste {  get; set; }=false;
         [DataMember] public string Poruka { get; set; } = "";
         [DataMember] public string Polje { get; set; } = "";
-        [DataMember] public string OcekivanaVrednost { get; set; } = "";
 
         public ValidationFault()
         {
             this.jeste = false;
             this.Poruka = "";
             this.Polje = "";
-            this.OcekivanaVrednost = "";
         }
     }
 }
