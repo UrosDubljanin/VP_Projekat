@@ -22,7 +22,7 @@ namespace Common
         [EnumMember]
         COMPLETED
     }
-    public class Results:IDisposable
+    public class Results
     {
         public Results()
         {
@@ -40,9 +40,5 @@ namespace Common
         [DataMember]
         public string Poruka { get; set; }
 
-        public void Dispose()
-        {
-            //throw new NotImplementedException();
-        }
     }
 }

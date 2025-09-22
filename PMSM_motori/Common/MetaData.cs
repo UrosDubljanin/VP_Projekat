@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Common
 {
     [DataContract]
-    public class MetaData : IDisposable
+    public class MetaData 
     {
         public MetaData()
         {
@@ -40,9 +40,5 @@ namespace Common
         [DataMember] public double Ambient { get; set; }
         [DataMember] public double Torque { get; set; }
 
-        public void Dispose()
-        {
-            //throw new NotImplementedException();
-        }
     }
 }

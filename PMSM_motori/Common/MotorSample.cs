@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Common
 {
     [DataContract]
-    public class MotorSample:IDisposable
+    public class MotorSample
     {
         public MotorSample() {
             Stator_Winding = 0;
@@ -38,9 +38,5 @@ namespace Common
         [DataMember] public double Ambient { get; set; }
         [DataMember] public double Torque { get; set; }
 
-        public void Dispose()
-        {
-            //throw new NotImplementedException();
-        }
     }
 }
