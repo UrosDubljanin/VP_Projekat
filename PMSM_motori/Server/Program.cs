@@ -28,7 +28,9 @@ namespace Server
             };
             service.OnTransferCompleted += (s, e) =>
             {
+                Console.ForegroundColor=ConsoleColor.Green;
                 Console.WriteLine($"[EVENT] Transfer completed.");
+                Console.ResetColor();
             };
 
             using (ServiceHost host = new ServiceHost(service))
